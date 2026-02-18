@@ -12,20 +12,23 @@ namespace Courses.Catalog.WebAPI.Repositories
         public void Configure(EntityTypeBuilder<Course> builder)
         {
             builder.ToCollection("courses");
-            builder.HasKey(c => c.Id);
-            builder.Property(c => c.Id).ValueGeneratedNever();
-            builder.Property(c => c.Name).HasElementName("name").HasMaxLength(100);
-            builder.Property(c => c.Description).HasElementName("description").HasMaxLength(1000);
-            builder.Property(c => c.CreatedDate).HasElementName("created_date");
-            builder.Property(c => c.UserId).HasElementName("user_id");
-            builder.Property(c => c.CategoryId).HasElementName("category_id");
-            builder.Property(c => c.Price).HasElementName("price");
-            builder.Property(c => c.Picture).HasElementName("picture");
-            builder.OwnsOne(c => c.Feature, f =>
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedNever();
+            builder.Property(x => x.Name).HasElementName("name").HasMaxLength(100);
+            builder.Property(x => x.Description).HasElementName("description").HasMaxLength(1000);
+            builder.Property(x => x.Created).HasElementName("created");
+            builder.Property(x => x.UserId).HasElementName("userId");
+            builder.Property(x => x.ImageUrl).HasElementName("imageUrl").HasMaxLength(200);
+            builder.Property(x => x.CategoryId).HasElementName("categoryId");
+            builder.Ignore(x => x.Category);
+
+
+            builder.OwnsOne(c => c.Feature, feature =>
             {
-                f.Property(f => f.Duration).HasElementName("duration");
-                f.Property(f => f.Rating).HasElementName("rating");
-                f.Property(f => f.EducatorFullName).HasElementName("educator_full_name");
+                feature.HasElementName("feature");
+                feature.Property(x => x.Duration).HasElementName("duration");
+                feature.Property(x => x.Rating).HasElementName("rating");
+                feature.Property(x => x.EducatorFullName).HasElementName("educatorFullName").HasMaxLength(100);
             });
         }
     }

@@ -1,0 +1,57 @@
+@baseAddress = http://localhost:5104
+@categoryId = 08de6a35-0413-ec1a-0015-5d544ca20000
+
+GET {{baseAddress}}/api/categories
+Accept: application/json
+###
+
+POST {{baseAddress}}/api/categories
+Content-Type: application/json
+
+{
+  "name": "New Category1",
+  "description": "Description of the new category"
+}
+###
+
+GET {{baseAddress}}/api/categories/08de6a38-1a3f-46d8-0015-5d544ca20000
+Accept: application/json
+###
+
+
+POST {{baseAddress}}/api/courses/create
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "course1",
+  "description": "Description of the new category",
+  "categoryId": "{{categoryId}}",
+  "price": 0,
+  "imageUrl": "https://example.com/course-image.jpg"
+}
+###
+
+GET {{baseAddress}}/api/courses
+Accept: application/json
+###
+
+PUT {{baseAddress}}/api/courses/update
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": "08de6d4b-b3ad-c1a5-1a47-3d328d5d0000",
+  "name": "course2",
+  "description": "Description of the new category",
+  "categoryId": "{{categoryId}}",
+  "price": 0,
+  "imageUrl": "https://example.com/course-image.jpg"
+}
+###
+
+
+DELETE  {{baseAddress}}/api/courses/08de6d4b-b3ad-c1a5-1a47-3d328d5d0000
+
+
+###

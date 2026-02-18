@@ -10,10 +10,12 @@ namespace Courses.Catalog.WebAPI.Repositories
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-           
+
             builder.ToCollection("categories");
-            builder.HasKey(c => c.Id);
-            builder.Property(c => c.Id).ValueGeneratedNever();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedNever();
+            builder.Ignore(x => x.Courses);
+
         }
     }
 }

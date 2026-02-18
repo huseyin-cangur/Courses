@@ -10,7 +10,7 @@ namespace Courses.Catalog.WebAPI.Options
         {
             services.AddOptions<MongoOption>().BindConfiguration(nameof(MongoOption)).ValidateDataAnnotations().ValidateOnStart();
 
-            services.AddScoped(sp => sp.GetRequiredService<IOptions<MongoOption>>().Value);
+            services.AddSingleton(sp => sp.GetRequiredService<IOptions<MongoOption>>().Value);
             return services;
         }
     }
